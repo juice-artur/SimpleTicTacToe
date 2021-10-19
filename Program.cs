@@ -1,10 +1,5 @@
 ﻿using System;
-using Game;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using  TicTacToe;
 
 namespace InterLink
 {
@@ -26,9 +21,9 @@ namespace InterLink
         }
         static void Main(string[] args)
         {
-            TicTacToe ttt = new TicTacToe();
+            Game ttt = new Game(3, '*');
             int i, j;
-            while(ttt.CheckWiner() == 'N')
+            while(ttt.IsInProgress())
             {
                 Draw(ttt.Field);
                 Console.WriteLine("Enter I");
@@ -38,8 +33,8 @@ namespace InterLink
                 ttt.Move(i, j);
                 Console.Clear();
             }
-
-            Console.WriteLine("The game ended with a result: " + (ttt.CheckWiner() == 'T' ? "Tie" : "Victory ") +  ttt.CheckWiner());
+            char winer = ttt.GetStatus() == GameState.TIE ? ' ': ttt.GetWiner(); 
+            Console.WriteLine("The game ended with a result: " + $"{ttt.GetStatus()}  {winer}");
 
         }
     }
