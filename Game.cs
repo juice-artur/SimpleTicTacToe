@@ -1,19 +1,16 @@
 namespace TicTacToe
 {
-    class Game : IRender
+    class Game
     {
         readonly char EMPTY_CELL;
         private GameState gameState;
-
+        private int size;
         public Game(int size, char emptyCell)
         {
             gameState = GameState.IN_PROGRESS;
             EMPTY_CELL = emptyCell;
             InitField(size);
-        }
-        public void Render()
-        {
-
+            this.size = size;
         }
         public bool IsInProgress()
         {
@@ -35,34 +32,52 @@ namespace TicTacToe
         }
         private void CheckState()
         {
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < size; ++i)
             {
-                if (Compare(field[i, 0], field[i, 1], field[i, 2]))
+                for (int j = 0; j < size - 2; ++j)
                 {
-                    gameState = GameState.WIN;
-                    return;
+                    if (Compare(field[i, j], field[i, j + 1], field[i, j + 2]))
+                    {
+                        gameState = GameState.WIN;
+                        return;
+                    }
                 }
             }
 
-            for (int j = 0; j < 3; j++)
+            for (int i = 0; i < size - 2; ++i)
             {
-                if (Compare(field[0, j], field[1, j], field[2, j]))
+                for (int j = 0; j < size; ++j)
                 {
-                    gameState = GameState.WIN;
-                    return;
+                    if (Compare(field[i, j], field[i + 1, j], field[i + 2, j ]))
+                    {
+                        gameState = GameState.WIN;
+                        return;
+                    }
                 }
             }
 
-
-            if (Compare(field[0, 0], field[1, 1], field[2, 2]))
+            for (int i = 0; i < size - 2; i++)
             {
-                gameState = GameState.WIN;
-                return;
+                for (int j = 0; j < size - 2; j++)
+                {
+                    if (Compare(field[i, j], field[i + 1, j + 1], field[i + 2, j + 2]))
+                    {
+                        gameState = GameState.WIN;
+                        return;
+                    }
+                }
             }
-            if (Compare(field[2, 0], field[1, 1], field[0, 2]))
+
+            for (int i = 0; i < size - 2; i++)
             {
-               gameState = GameState.WIN;
-               return;
+                for (int j = 2; j < size; j++)
+                {
+                    if (Compare(field[i, j], field[i + 1, j - 1], field[i + 2, j - 2]))
+                    {
+                        gameState = GameState.WIN;
+                        return;
+                    }
+                }
             }
 
             for (int i = 0; i < 3; i++)
@@ -77,17 +92,17 @@ namespace TicTacToe
                 }
             }
 
-           gameState = GameState.TIE;
+            gameState = GameState.TIE;
         }
 
-        private void InitField(int size) 
+        private void InitField(int size)
         {
-            field = new char[size, size]; 
-            for(int i = 0; i < size; ++i)
+            field = new char[size, size];
+            for (int i = 0; i < size; ++i)
             {
-                for(int j = 0; j < size; ++j)
+                for (int j = 0; j < size; ++j)
                 {
-                    field[i,j] = EMPTY_CELL;
+                    field[i, j] = EMPTY_CELL;
                 }
             }
         }
@@ -97,7 +112,7 @@ namespace TicTacToe
         }
         public void Move(int i, int j)
         {
-            if (i >= 0 && i < 3 && j >= 0 && j < 3)
+            if (i >= 0 && i < size && j >= 0 && j < size)
             {
                 if (field[i, j] == EMPTY_CELL)
                 {
@@ -119,8 +134,4 @@ namespace TicTacToe
             }
         }
     }
-}
-interface IRender
-{
-    void Render();
 }

@@ -1,7 +1,0 @@
-namespace TicTacToe
-{
-    struct Pleyer
-    {
-        
-    }
-}
