@@ -58,10 +58,13 @@ namespace Game
         }
         public void Move(int i, int j)
         {
-            if(field[i,j] == '*')
+            if (i >= 0 && i < 3 && j >= 0 && j < 3)
             {
-                field[i, j] = curentPlayer; 
-                ChangeCurentPlayer();
+                if (field[i, j] == '*')
+                {
+                    field[i, j] = curentPlayer;
+                    ChangeCurentPlayer();
+                }
             }
         }
         private char[,] field = { { '*', '*', '*' }, { '*', '*', '*' }, { '*', '*', '*' } };
