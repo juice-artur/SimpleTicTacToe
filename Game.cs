@@ -5,15 +5,38 @@ namespace TicTacToe
         const char PLAYER_X = 'X';
         const char PLAYER_O = 'O';
         readonly char EMPTY_CELL;
-        private char curentPlayer = PLAYER_X;
-        private GameState gameState;
         private int size;
+        private char curentPlayer = PLAYER_X;
+        private char[,] field;
+        private GameState gameState;
+
+
         public Game(int size, char emptyCell)
         {
             gameState = GameState.IN_PROGRESS;
             EMPTY_CELL = emptyCell;
             InitField(size);
             this.size = size;
+        }
+        
+        public char[,] Field
+        {
+            get
+            {
+                return field;
+            }
+        }
+          public void Move(int i, int j)
+        {
+            if (i >= 0 && i < size && j >= 0 && j < size)
+            {
+                if (field[i, j] == EMPTY_CELL)
+                {
+                    field[i, j] = curentPlayer;
+                    ChangeCurentPlayer();
+                }
+            }
+            CheckState();
         }
         public bool IsInProgress()
         {
@@ -112,26 +135,6 @@ namespace TicTacToe
         private bool Compare(char a, char b, char c)
         {
             return (a != EMPTY_CELL && a == b && b == c);
-        }
-        public void Move(int i, int j)
-        {
-            if (i >= 0 && i < size && j >= 0 && j < size)
-            {
-                if (field[i, j] == EMPTY_CELL)
-                {
-                    field[i, j] = curentPlayer;
-                    ChangeCurentPlayer();
-                }
-            }
-            CheckState();
-        }
-        private char[,] field;
-        public char[,] Field
-        {
-            get
-            {
-                return field;
-            }
         }
     }
 }
