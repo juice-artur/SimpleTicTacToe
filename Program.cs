@@ -1,5 +1,5 @@
 ﻿using System;
-using  TicTacToe;
+using TicTacToe;
 using System.Linq;
 
 namespace InterLink
@@ -26,18 +26,18 @@ namespace InterLink
             int size = 3;
             Game ttt = new Game(size, '*');
             int i, j;
-            while(ttt.IsInProgress())
+            while (ttt.IsInProgress())
             {
                 Draw(ttt.Field, size);
                 Console.WriteLine("Enter I");
-                i =  Convert.ToInt32(Console.ReadLine());
+                i = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Enter J ");
-                j =  Convert.ToInt32(Console.ReadLine());
+                j = Convert.ToInt32(Console.ReadLine());
                 ttt.Move(i, j);
                 Console.Clear();
             }
             Draw(ttt.Field, size);
-            char winer = ttt.GetStatus() == GameState.TIE ? ' ': ttt.GetWiner(); 
+            char winer = ttt.GetStatus() == GameState.TIE ? ' ' : ttt.GetWiner();
             Console.WriteLine("The game ended with a result: " + $"{ttt.GetStatus().ToString()}  {winer}");
 
         }

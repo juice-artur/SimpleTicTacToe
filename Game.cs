@@ -11,14 +11,22 @@ namespace TicTacToe
         private GameState gameState;
 
 
-        public Game(int size, char emptyCell)
+        public Game(int sizeField, char emptyCell)
         {
             gameState = GameState.IN_PROGRESS;
             EMPTY_CELL = emptyCell;
+            size =  sizeField >= 3? sizeField : 3;
             InitField(size);
-            this.size = size;
         }
-        
+        public Game(int sizeField) : this(sizeField, '*')
+        {
+
+        }
+        public Game() : this(3, '*')
+        {
+
+        }
+
         public char[,] Field
         {
             get
@@ -26,7 +34,7 @@ namespace TicTacToe
                 return field;
             }
         }
-          public void Move(int i, int j)
+        public void Move(int i, int j)
         {
             if (i >= 0 && i < size && j >= 0 && j < size)
             {
@@ -74,7 +82,7 @@ namespace TicTacToe
             {
                 for (int j = 0; j < size; ++j)
                 {
-                    if (Compare(field[i, j], field[i + 1, j], field[i + 2, j ]))
+                    if (Compare(field[i, j], field[i + 1, j], field[i + 2, j]))
                     {
                         gameState = GameState.WIN;
                         return;
