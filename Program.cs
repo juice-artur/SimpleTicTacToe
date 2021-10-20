@@ -23,7 +23,7 @@ namespace InterLink
         }
         static void Main(string[] args)
         {
-            int size = 5;
+            int size = 3;
             Game ttt = new Game(size, '*');
             int i, j;
             while(ttt.IsInProgress())

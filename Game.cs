@@ -2,7 +2,10 @@ namespace TicTacToe
 {
     class Game
     {
+        const char PLAYER_X = 'X';
+        const char PLAYER_O = 'O';
         readonly char EMPTY_CELL;
+        private char curentPlayer = PLAYER_X;
         private GameState gameState;
         private int size;
         public Game(int size, char emptyCell)
@@ -28,7 +31,7 @@ namespace TicTacToe
         }
         private void ChangeCurentPlayer()
         {
-            curentPlayer = curentPlayer == 'X' ? 'O' : 'X';
+            curentPlayer = curentPlayer == PLAYER_X ? PLAYER_O : PLAYER_X;
         }
         private void CheckState()
         {
@@ -123,9 +126,6 @@ namespace TicTacToe
             CheckState();
         }
         private char[,] field;
-        private char[] pleyers = { 'X', 'O' };
-
-        private char curentPlayer = 'X';
         public char[,] Field
         {
             get
